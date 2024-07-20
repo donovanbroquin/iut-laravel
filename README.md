@@ -13,8 +13,6 @@ This repository is a starter giving you all tools you need to help you build you
 - Ubuntu 24.04 installed from the [Microsoft Store](https://apps.microsoft.com/detail/9nz3klhxdjp5?hl=fr-fr&gl=FR)
 - [Optional] [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=fr-FR&gl=FR)
 
-> You can bypass the WSL 2 with Ubuntu but the app performance could be far lower than using Ubuntu
-
 ## Launch
 ### Reset the Git
 Create a project named <TO_REPLACE> in your own GitHub then clone this one.
@@ -23,15 +21,16 @@ Create a project named <TO_REPLACE> in your own GitHub then clone this one.
 git clone dbroquin/iut-laravel
 ```
 
-> If you are using Windows, make sure to clone this repository in a WSL2 Ubuntu 24.04 distro
+> On Windows, please make sure to clone this repository in the WSL 2 Ubuntu 24.04 distro.
 
-Then, delete the `.git` directory at cloned repository root and follow the `or create a new repository on the command line` section showed by GitHub **excluding** the **first line**.
+Then, delete the `.git` directory in the cloned repository root and follow the `or create a new repository on the command line` section showed by GitHub **excluding** the **first line** and updating the `git add README.md` to be `git add .` .
 
 ### Clean the project
 Housekeeping time.
 
 Delete the following files and directories
 - .github
+- screenshots
 - dockerfile
 
 ### Start the environment
@@ -42,6 +41,8 @@ docker compose up -d
 ```
 
 > This command line **MUST** be launched from your host using the Visual Studio Code **integrated terminal**
+
+> **Windows users**: open the project using the WSL extension @todo > make video
 
 Once the command has been launched, you should see something similar in your terminal.
 
@@ -56,6 +57,7 @@ Finally, you can access the container terminal using the Visual Studio command p
 iut-laravel
 iut:latest
 ```
+
 
 ### Create the project root
 Your Laravel app code **must** be present in the `laravel` directory. Use the following command lines to initiate it
@@ -77,3 +79,26 @@ In Docker Desktop, you can see three containers in the iut-laravel stack.
 - laravel: this is where you application live
 - redis: will be used later, see it as a NoSQL database for caching
 - mailpit: will be used later too for email development and can be seen at [127.0.0.1:8025](http://127.0.0.1:8025)
+
+## Terminals
+To start the project with confidence, you need to remember there is many terminal to use and each one has a specific purpose.
+
+- system one: use it to interact with Git, mount containers. For Windows user, this terminal is the one running in the Ubuntu 24.04 distro
+- container one: use it to interact with the app. Ex: `php artisan`, `composer`, ... This one is launched using the VSCode Docker plugin
+
+### Open the container terminal
+VSCode with the Docker plugin make it easy to open a terminal within a container by using the command palette and using the `> Docker Containers: Attach Shell` shortcut
+
+To open the command palette, you can use the following keyboard shortcuts
+- macOS: **CMD+SHIFT+P**
+- Windows: **FN+F1**
+
+![Visual Studio Code open container terminal](https://github.com/dbroquin/iut-laravel/blob/624b5e34d1e5cc41b9e5f9c7262f9247e28c5e92/screenshots/vscode-open-container-terminal.mov?raw=true)
+
+### Which terminal?
+In VSCode, those terminals can be differentiated by their name and icons.
+In the following screenshot, the system terminal is the `zsh` one in the right column and the container one, the `Shell: laravel task`.
+
+![Visual Studio Code terminals.](https://github.com/dbroquin/iut-laravel/blob/624b5e34d1e5cc41b9e5f9c7262f9247e28c5e92/screenshots/vscode-terminals.png?raw=true)
+
+> The system terminal name can be different for you according to your environment. Keep in mind the Docker container one will have Shell prefix and a spinner at end
