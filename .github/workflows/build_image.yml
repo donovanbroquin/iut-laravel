@@ -26,4 +26,4 @@ jobs:
         with:
           platforms: linux/amd64
           push: true
-          tags: donovanbroquin/iut-starter:latest
+          tags: donovanbroquin/iut-laravel:latest
