@@ -66,7 +66,7 @@ composer create-project laravel/laravel .
 
 This command will create all files and install dependencies using [Composer](https://getcomposer.org/doc/00-intro.md)
 
-Once it’s done, the app should be available at [127.0.0.1](127.0.0.1:80)
+Once it’s done, the app should be available at [127.0.0.1](http://127.0.0.1)
 
 ![Laravel default screen](https://github.com/dbroquin/iut-laravel/blob/3b34647736b46b267ab39823bb5608e8f5d23073/screenshots/laravel-ready.png?raw=true)
 
@@ -76,4 +76,4 @@ Congratulations 🎉 You can now start build your app!
 In Docker Desktop, you can see three containers in the iut-laravel stack.
 - laravel: this is where you application live
 - redis: will be used later, see it as a NoSQL database for caching
-- mailpit: will be used later too for email development and can be seen at [127.0.0.1:8025](127.0.0.1:8025)
+- mailpit: will be used later too for email development and can be seen at [127.0.0.1:8025](http://127.0.0.1:8025)
