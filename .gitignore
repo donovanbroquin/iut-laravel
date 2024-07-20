@@ -1,2 +1,3 @@
 .docker/stores
 laravel/database/database.sqlite
+.DS_Store
