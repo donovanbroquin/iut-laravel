@@ -1,7 +1,7 @@
 services:
   laravel:
     container_name: laravel
-    image: iut:latest
+    image: donovanbroquin/iut-laravel:latest
     networks:
       - laravel
     ports:
