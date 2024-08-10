@@ -1,17 +1,18 @@
 services:
   laravel:
     container_name: laravel
-    image: donovanbroquin/iut-laravel:latest
+    # image: donovanbroquin/iut-laravel:latest
+    image: iut:latest
     networks:
       - laravel
     ports:
       - 80:80
     volumes:
-      - ./laravel:/var/www/html
+      - ./laravel:/var/www/app
   
   redis:
     container_name: redis
-    image: redis:7.2.5
+    image: redis:7.4.0
     networks: 
       - laravel
     volumes:
@@ -19,7 +20,7 @@ services:
 
   mailpit:
     container_name: mailpit
-    image: axllent/mailpit:v1.19.1
+    image: axllent/mailpit:v1.20.0
     networks:
       - laravel
     ports:

@@ -1,8 +1,8 @@
-FROM php:8.3.9-apache-bookworm
+FROM php:8.3.10-apache-bookworm
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+ENV APACHE_DOCUMENT_ROOT=/var/www/app/public
 ENV NVM_DIR=/usr/local/nvm
-ENV NODE_VERSION=20.15.1
+ENV NODE_VERSION=20.16.0
 
 # Update Apache configuration
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf && \
@@ -30,3 +30,10 @@ RUN pecl install redis && \
 
 # Install Composer
 COPY --from=composer:2.7.7 /usr/bin/composer /usr/bin/composer
+
+# Ensure app directory exists
+RUN mkdir /var/www/app && \
+    chown www-data:www-data /var/www/app
+
+# Change default path
+WORKDIR /var/www/app
