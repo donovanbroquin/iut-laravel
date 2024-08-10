@@ -18,12 +18,12 @@ This repository is a starter giving you all tools you need to help you build you
 Create a project named <TO_REPLACE> in your own GitHub then clone this one.
 
 ```shell
-git clone dbroquin/iut-laravel
+git clone donovanbroquin/iut-laravel
 ```
 
 > On Windows, please make sure to clone this repository in the WSL 2 Ubuntu 24.04 distro.
 
-Then, delete the `.git` directory in the cloned repository root and follow the `or create a new repository on the command line` section showed by GitHub **excluding** the **first line** and updating the `git add README.md` to be `git add .` .
+Then, delete the hidden `.git` directory in the cloned repository root and follow the `or create a new repository on the command line` section showed by GitHub **excluding** the **first line** and updating the `git add README.md` line to be `git add .` .
 
 ### Clean the project
 Housekeeping time.
@@ -53,14 +53,13 @@ Also, a `laravel` directory should be present in the project tree now.
 Finally, you can access the container terminal using the Visual Studio command palette and selecting
 
 ```shell
-> Docker Containers: Attach Shell
-iut-laravel
-iut:latest
+> Docker Containers: Attach Shell > iut-laravel > iut:latest
 ```
 
 
 ### Create the project root
-Your Laravel app code **must** be present in the `laravel` directory. Use the following command lines to initiate it
+Your Laravel app code **must** be in the `laravel` directory which is the default place for a terminal within the container. 
+Use the following command lines to initiate it.
 
 ```shell
 composer create-project laravel/laravel .
@@ -81,10 +80,10 @@ In Docker Desktop, you can see three containers in the iut-laravel stack.
 - mailpit: will be used later too for email development and can be seen at [127.0.0.1:8025](http://127.0.0.1:8025)
 
 ## Terminals
-To start the project with confidence, you need to remember there is many terminal to use and each one has a specific purpose.
+To keep peace in your mind, you need to remember there is many terminals to use and each one has a specific purpose.
 
-- system one: use it to interact with Git, mount containers. For Windows user, this terminal is the one running in the Ubuntu 24.04 distro
-- container one: use it to interact with the app. Ex: `php artisan`, `composer`, ... This one is launched using the VSCode Docker plugin
+- system: use it to interact with Git, mount containers. For Windows user, this terminal is the one running in the Ubuntu 24.04 distro
+- container: use it to interact with the app and PHP. Ex: `php artisan`, `composer`, ... This one is launched using the VSCode Docker plugin
 
 ### Open the container terminal
 VSCode with the Docker plugin make it easy to open a terminal within a container by using the command palette and using the `> Docker Containers: Attach Shell` shortcut
