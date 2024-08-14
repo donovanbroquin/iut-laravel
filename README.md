@@ -14,27 +14,18 @@ This repository is a starter giving you all tools you need to help you build you
 - [Optional] [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=fr-FR&gl=FR)
 
 ## Launch
-### Reset the Git
-Create a project named <TO_REPLACE> in your own GitHub then clone this one.
-
-```shell
-git clone donovanbroquin/iut-laravel
-```
+### Create a GitHub repository
+Create a project named iut-weather in your own GitHub and follow the repository instructions.
 
 > On Windows, please make sure to clone this repository in the WSL 2 Ubuntu 24.04 distro.
 
-Then, delete the hidden `.git` directory in the cloned repository root and follow the `or create a new repository on the command line` section showed by GitHub **excluding** the **first line** and updating the `git add README.md` line to be `git add .` .
+### Copy required files
+From this repository (donovanbroquin/iut-laravel), take the following files and put them on your own repository:
 
-### Clean the project
-Housekeeping time.
-
-Delete the following files and directories
-- .github
-- screenshots
-- dockerfile
+- compose.yml
 
 ### Start the environment
-You can now start the environment using Docker Compose with the following command line from the project root
+You can now start the environment from your own repository using Docker Compose with the following command line from the project root
 
 ```shell
 docker compose up -d
