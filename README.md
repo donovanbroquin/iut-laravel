@@ -61,6 +61,7 @@ Now, you have to update two files
 
 ```env
 # .env
+
 APP_URL=http://127.0.0.1
 ```
 
