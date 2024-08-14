@@ -47,7 +47,6 @@ Finally, you can access the container terminal using the Visual Studio command p
 > Docker Containers: Attach Shell > iut-laravel > iut:latest
 ```
 
-
 ### Create the project root
 Your Laravel app code **must** be in the `laravel` directory which is the default place for a terminal within the container. 
 Use the following command lines to initiate it.
@@ -57,6 +56,32 @@ composer create-project laravel/laravel .
 ```
 
 This command will create all files and install dependencies using [Composer](https://getcomposer.org/doc/00-intro.md)
+
+Now, you have to update two files
+
+```env
+# .env
+APP_URL=http://127.0.0.1
+```
+
+```javascript
+# vite.config.js
+
+export default defineConfig({
+    plugins: [
+        laravel({
+            input: [
+                'resources/css/app.css',
+                'resources/js/app.js',
+            ],
+            refresh: true,
+        }),
+    ],
+    server: {
+        host: '0.0.0.0',
+    }
+});
+```
 
 Once it’s done, the app should be available at [127.0.0.1](http://127.0.0.1)
 
