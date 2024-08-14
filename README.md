@@ -23,6 +23,7 @@ Create a project named iut-weather in your own GitHub and follow the repository 
 From this repository (donovanbroquin/iut-laravel), take the following files and put them on your own repository:
 
 - compose.yml
+- .gitignore
 
 ### Start the environment
 You can now start the environment from your own repository using Docker Compose with the following command line from the project root

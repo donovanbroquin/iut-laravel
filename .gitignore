@@ -1,3 +1,4 @@
 .docker/stores
-laravel/database/database.sqlite
 .DS_Store
+supervisord.pid
+laravel/database/database.sqlite
