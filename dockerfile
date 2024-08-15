@@ -1,16 +1,17 @@
 FROM php:8.3.10-fpm-bookworm
 
-ENV APACHE_DOCUMENT_ROOT=/var/www/app/public
 ENV NVM_DIR=/usr/local/nvm
 ENV NODE_VERSION=20.16.0
 
-# Install system dependencies
+# Install system dependencies, prepare supervisord and update access for final user
 RUN apt update -y && \
     apt install -y libbz2-dev zlib1g-dev libpng-dev libxml2-dev libxslt-dev libzip-dev libonig-dev zip nginx supervisor && \ 
     apt clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /var/run/supervisord && \
+    chown -R www-data:www-data /var/www
 
-# Install Node.js using NVM
+# Install and prepare Node.js using NVM
 RUN mkdir -p $NVM_DIR && \
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash && \
     . $NVM_DIR/nvm.sh && \
@@ -42,6 +43,7 @@ RUN rm -rf /var/www/html && \
 # Change default path
 WORKDIR /var/www/app
 
+# Change default user
 USER www-data
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
