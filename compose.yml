@@ -8,14 +8,6 @@ services:
       - 80:80
     volumes:
       - ./laravel:/var/www/app
-  
-  redis:
-    container_name: redis
-    image: redis:7.4.0
-    networks: 
-      - laravel
-    volumes:
-      - ./.docker/stores/redis:/data
 
   mailpit:
     container_name: mailpit
