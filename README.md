@@ -19,9 +19,10 @@ Create a project named iut-weather in your own GitHub and follow the repository 
 
 > On Windows, please make sure to clone this repository in the WSL 2 Ubuntu 24.04 distro.
 
-### Copy required files
+### Copy required files and directory
 From this repository (donovanbroquin/iut-laravel), take the following files and put them on your own repository:
 
+- .devContainer
 - compose.yml
 - .gitignore
 

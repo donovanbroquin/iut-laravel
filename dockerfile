@@ -40,6 +40,8 @@ RUN rm -rf /var/www/html && \
     mkdir -p /var/lib/nginx/body /var/run/nginx && \
     chown -R www-data:www-data /var/lib/nginx /var/log/nginx /var/run/nginx
 
+RUN usermod -s /bin/bash www-data
+
 # Change default path
 WORKDIR /var/www/app
 

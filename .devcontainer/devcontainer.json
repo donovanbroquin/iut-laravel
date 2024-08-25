@@ -1,0 +1,10 @@
+{
+	"name": "Laravel",
+	"dockerComposeFile": [
+		"../compose.yml"
+	],
+	"service": "laravel",
+	"workspaceFolder": "/var/www/app",
+	"forwardPorts": [80],
+	"remoteUser": "www-data"
+}
