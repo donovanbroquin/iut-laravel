@@ -5,28 +5,55 @@ This repository is a starter giving you all tools you need to help you build you
 
 ## Requirements
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Visual Studio Code](https://code.visualstudio.com/download) with the [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) plugin
+- [Visual Studio Code](https://code.visualstudio.com/download) with the [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) extension
 - Git
 
 ### Windows Requirements
 - [WSL 2](https://learn.microsoft.com/fr-fr/windows/wsl/install)
 - Ubuntu 24.04 installed from the [Microsoft Store](https://apps.microsoft.com/detail/9nz3klhxdjp5?hl=fr-fr&gl=FR)
+- [WLS](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension for Visual Studio Code
 - [Optional] [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=fr-FR&gl=FR)
 
-## Launch
+## Init project
 ### Create a GitHub repository
 Create a project named iut-weather in your own GitHub and follow the repository instructions.
 
-> On Windows, please make sure to clone this repository in the WSL 2 Ubuntu 24.04 distro.
+> On Windows, make sure to clone this repository in the WSL 2 Ubuntu 24.04 distro.
 
-### Copy required files and directory
+### Files and directory
 From this repository (donovanbroquin/iut-laravel), take the following files and put them on your own repository:
 
-- .devContainer
-- compose.yml
 - .gitignore
+- compose.yml
+- dockerfile.local
 
-### Start the environment
+After that, create a *laravel* directory at project **root**
+
+### Create the environment
+You have two ways to create the environment:
+- Dev Containers: easier but require the [Microsoft Dev Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension
+- Docker Compose: common but need to play with differentes terminals and export some data on Windows / Linux
+
+> If you cannot install the Dev Containers extension, you have to use the Docker Compose way.
+
+#### Windows / Linux specifities
+Since you have to use WSL 2 with Ubuntu for this projet, you need to export the user and group ids for your Ubuntu user.
+Simply launch this in the WSL 2 terminal:
+
+```shell
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+```
+
+#### Dev Containers
+Open the project with VSCode and a notification should appear to ask you if you want to re-open in a container. 
+Say yes and you should have a new window with an empty explorer.
+
+If there is no notification, you can launch it using the command palette and selecting `> Dev Containers: Rebuild and Reopen in Container`.
+
+> Using this way, your VSCode is directly in the laravel directory of your project
+
+#### Docker Compose
 You can now start the environment from your own repository using Docker Compose with the following command line from the project root
 
 ```shell
@@ -40,8 +67,6 @@ docker compose up -d
 Once the command has been launched, you should see something similar in your terminal.
 
 ![Visual Studio Code Terminal with running Docker Compose stack](https://github.com/dbroquin/iut-laravel/blob/3b34647736b46b267ab39823bb5608e8f5d23073/screenshots/docker-compose-launched.png?raw=true)
-
-Also, a `laravel` directory should be present in the project tree now.
 
 Finally, you can access the container terminal using the Visual Studio command palette and selecting
 
@@ -120,3 +145,28 @@ In the following screenshot, the system terminal is the `zsh` one in the right c
 ![Visual Studio Code terminals.](https://github.com/dbroquin/iut-laravel/blob/624b5e34d1e5cc41b9e5f9c7262f9247e28c5e92/screenshots/vscode-terminals.png?raw=true)
 
 > The system terminal name can be different for you according to your environment. Keep in mind the Docker container one will have Shell prefix and a spinner at end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export USER_ID=$(id -u) && export GROUP_ID=$(id -g)

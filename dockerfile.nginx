@@ -1,0 +1,7 @@
+FROM nginx:1.27.1-bookworm
+
+COPY configs/nginx.conf /etc/nginx/sites-available/default
+COPY configs/nginx.conf /etc/nginx/conf.d/default.conf
+
+RUN mkdir /etc/nginx/sites-enabled/ && \
+    ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
