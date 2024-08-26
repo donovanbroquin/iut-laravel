@@ -1,9 +1,9 @@
-name: Build Docker image
+name: Build Nginx Docker image
 
 on:
   workflow_dispatch:
   push:
-    paths: [dockerfile, .github/workflows/build_image.yml]
+    paths: [dockerfile.nginx, .github/workflows/build_nginx_image.yml]
 
 jobs:
   build:
@@ -25,5 +25,6 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           platforms: linux/amd64,linux/arm64
+          file: dockerfile.nginx
           push: true
-          tags: donovanbroquin/iut-laravel:latest
+          tags: donovanbroquin/iut-laravel:nginx
