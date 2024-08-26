@@ -11,7 +11,7 @@ This repository is a starter giving you all tools you need to help you build you
 ### Windows Requirements
 - [WSL 2](https://learn.microsoft.com/fr-fr/windows/wsl/install)
 - Ubuntu 24.04 installed from the [Microsoft Store](https://apps.microsoft.com/detail/9nz3klhxdjp5?hl=fr-fr&gl=FR)
-- [WLS](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension for Visual Studio Code
+- [WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) extension for Visual Studio Code
 - [Optional] [Windows Terminal](https://apps.microsoft.com/detail/9n0dx20hk701?hl=fr-FR&gl=FR)
 
 ## Init project
