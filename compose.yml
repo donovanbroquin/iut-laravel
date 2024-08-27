@@ -27,6 +27,15 @@ services:
     depends_on:
       - laravel
 
+  mailpit:
+    container_name: mailpit
+    image: axllent/mailpit:v1.20.2
+    restart: unless-stopped
+    networks:
+      - laravel
+    ports:
+      - 8025:8025
+
 networks:
   laravel:
     name: laravel
