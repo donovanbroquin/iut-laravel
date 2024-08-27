@@ -120,7 +120,7 @@ Congratulations 🎉 You can now start build your app!
 ## Services
 In Docker Desktop, you can see three containers in the iut-laravel stack.
 - laravel: this is where you application live
-- redis: will be used later, see it as a NoSQL database for caching
+- nginx: the webserver, like Apache
 - mailpit: will be used later too for email development and can be seen at [127.0.0.1:8025](http://127.0.0.1:8025)
 
 ## Terminals
