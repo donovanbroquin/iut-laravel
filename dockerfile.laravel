@@ -44,3 +44,6 @@ COPY configs/php.ini /usr/local/etc/php/conf.d/99-iut.ini
 
 # Change default path
 WORKDIR /var/www/app
+
+# Export Vite.js server port
+EXPOSE 5173

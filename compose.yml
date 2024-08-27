@@ -10,6 +10,8 @@ services:
         - GROUP_ID=$GROUP_ID
     networks:
       - laravel
+    ports:
+      - 5173:5173
     volumes:
       - ./laravel:/var/www/app
 
@@ -21,7 +23,6 @@ services:
       - laravel
     ports:
       - 80:80
-      - 5173:5173
     volumes:
       - ./laravel:/var/www/app
     depends_on:
