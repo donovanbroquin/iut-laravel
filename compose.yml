@@ -4,7 +4,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: dockerfile.local
+      dockerfile: dockerfile
       args:
         - USER_ID=$USER_ID
         - GROUP_ID=$GROUP_ID
