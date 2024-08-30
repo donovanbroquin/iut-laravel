@@ -1,0 +1,61 @@
+FROM donovanbroquin/iut-laravel:laravel as builder
+
+COPY ./laravel .
+
+RUN composer install --optimize-autoloader --classmap-authoritative && \
+    npm i && \
+    npm run build
+
+FROM php:8.3.10-fpm-bookworm
+
+ARG APP_DEBUG=true
+ARG APP_KEY
+ARG DB_CONNECTION=sqlite
+ARG OPEN_WEATHER_API_KEY
+
+ENV APP_DEBUG=$APP_DEBUG
+ENV APP_KEY=$APP_KEY
+ENV DB_CONNECTION=$DB_CONNECTION
+ENV OPEN_WEATHER_API_KEY=$OPEN_WEATHER_API_KEY
+
+# Change default path
+WORKDIR /var/www/app
+
+# Install system dependencies
+RUN apt update -y && \
+    apt install -y libbz2-dev zlib1g-dev libpng-dev libxml2-dev libxslt-dev libzip-dev libonig-dev zip supervisor nginx && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /var/run/supervisord && \
+    chown -R www-data:www-data /var/www
+
+# Install PHP extensions
+RUN pecl install redis && \
+    docker-php-ext-install -j$(nproc) mbstring exif pcntl bcmath gd zip && \
+    docker-php-ext-enable redis
+
+# Copy app, build artifacts, supervisor / nginx configs
+COPY --chown=www-data ./laravel .
+COPY --chown=www-data --from=builder /var/www/app/vendor /var/www/app/vendor
+COPY --chown=www-data --from=builder /var/www/app/public /var/www/app/public
+COPY configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY configs/nginx.conf /etc/nginx/sites-available/default
+
+# Clean default nginx install
+RUN rm -rf /var/www/html && \
+    sed -i 's|run/nginx.pid|var/run/nginx/nginx.pid|g' /etc/nginx/nginx.conf && \
+    mkdir -p /var/lib/nginx/body /var/run/nginx && \
+    chown -R www-data:www-data /var/lib/nginx /var/log/nginx /var/run/nginx
+
+# Ensure www-data can open a bash
+RUN usermod -s /bin/bash www-data
+
+# Define www-data as container user
+USER www-data
+
+# App specific commands
+RUN touch database/database.sqlite && \
+    php artisan migrate --force && \
+    php artisan optimize
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]

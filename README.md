@@ -25,7 +25,8 @@ From this repository (donovanbroquin/iut-laravel), take the following files and 
 
 - .gitignore
 - compose.yml
-- dockerfile.local
+- dockerfile
+- dockerfile.production
 
 After that, create a *laravel* directory at project **root**
 
