@@ -1,0 +1,39 @@
+FROM php:8.3.10-fpm-bookworm
+
+# Change default path
+WORKDIR /var/www/app
+
+# Install system dependencies
+RUN apt update -y && \
+    apt install -y libbz2-dev zlib1g-dev libpng-dev libxml2-dev libxslt-dev libzip-dev libonig-dev zip supervisor nginx && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/* && \
+    mkdir /var/run/supervisord && \
+    chown -R www-data:www-data /var/www
+
+# Install PHP extensions
+RUN pecl install redis && \
+    docker-php-ext-install -j$(nproc) mbstring exif pcntl bcmath gd zip && \
+    docker-php-ext-enable redis
+
+# Copy supervisor / nginx configs
+COPY configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY configs/nginx.production.conf /etc/nginx/sites-available/default
+COPY configs/php.ini /usr/local/etc/php/conf.d/99-iut.ini
+
+# Ensure container final user can run supervisor
+RUN chown -R www-data:www-data /var/run/supervisord
+
+# Clean default nginx install
+RUN rm -rf /var/www/html && \
+    sed -i 's|run/nginx.pid|var/run/nginx/nginx.pid|g' /etc/nginx/nginx.conf && \
+    mkdir -p /var/lib/nginx/body /var/run/nginx && \
+    chown -R www-data:www-data /var/lib/nginx /var/log/nginx /var/run/nginx
+
+# Ensure www-data can open a bash
+RUN usermod -s /bin/bash www-data
+
+# Define www-data as container user
+USER www-data
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
