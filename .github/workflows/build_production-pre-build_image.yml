@@ -1,4 +1,4 @@
-name: Build Producution Pre-build Docker image
+name: Build Production pre-build Docker image
 
 on:
   workflow_dispatch:
