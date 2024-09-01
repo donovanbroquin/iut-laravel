@@ -17,3 +17,8 @@ variable "dns_zone" {
   type      = string
   sensitive = false
 }
+
+variable "subdomains" {
+  type = list(string)
+  sensitive = false
+}

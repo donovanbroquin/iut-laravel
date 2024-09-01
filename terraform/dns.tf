@@ -1,30 +1,34 @@
-resource "ovh_domain_zone_record" "iut_ipv4" {
+# resource "ovh_domain_zone_record" "iut_ipv4" {
+#   zone      = var.dns_zone
+#   subdomain = "iut"
+#   fieldtype = "A"
+#   ttl       = 300
+#   target    = hcloud_server.main.ipv4_address
+# }
+
+# resource "ovh_domain_zone_record" "iut_ipv6" {
+#   zone      = var.dns_zone
+#   subdomain = "iut"
+#   fieldtype = "AAAA"
+#   ttl       = 300
+#   target    = hcloud_server.main.ipv6_address
+# }
+
+resource "ovh_domain_zone_record" "ipv4" {
+  for_each  = toset(var.subdomains)
+  
   zone      = var.dns_zone
-  subdomain = "iut"
+  subdomain = each.value
   fieldtype = "A"
   ttl       = 300
   target    = hcloud_server.main.ipv4_address
 }
 
-resource "ovh_domain_zone_record" "iut_ipv6" {
+resource "ovh_domain_zone_record" "ipv6" {
+  for_each  = toset(var.subdomains)
+  
   zone      = var.dns_zone
-  subdomain = "iut"
-  fieldtype = "AAAA"
-  ttl       = 300
-  target    = hcloud_server.main.ipv6_address
-}
-
-resource "ovh_domain_zone_record" "nginx_ipv4" {
-  zone      = var.dns_zone
-  subdomain = "nginx"
-  fieldtype = "A"
-  ttl       = 300
-  target    = hcloud_server.main.ipv4_address
-}
-
-resource "ovh_domain_zone_record" "nginx_ipv6" {
-  zone      = var.dns_zone
-  subdomain = "nginx"
+  subdomain = each.value
   fieldtype = "AAAA"
   ttl       = 300
   target    = hcloud_server.main.ipv6_address
