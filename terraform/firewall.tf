@@ -33,7 +33,7 @@ rule {
     rule {
     direction = "out"
     protocol  = "tcp"
-    source_ips = [
+    destination_ips = [
       "0.0.0.0/0",
       "::/0"
     ]
