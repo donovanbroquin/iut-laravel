@@ -29,4 +29,13 @@ rule {
       var.private_ipv6
     ]
   }
+
+    rule {
+    direction = "out"
+    protocol  = "tcp"
+    source_ips = [
+      "0.0.0.0/0",
+      "::/0"
+    ]
+  }
 }
