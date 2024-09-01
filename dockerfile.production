@@ -15,14 +15,10 @@ RUN composer install --optimize-autoloader --classmap-authoritative && \
 FROM donovanbroquin/iut-laravel:production-pre-build
 
 ARG APP_DEBUG=true
-ARG APP_KEY
 ARG DB_CONNECTION=sqlite
-ARG OPEN_WEATHER_API_KEY
 
 ENV APP_DEBUG=$APP_DEBUG
-ENV APP_KEY=$APP_KEY
 ENV DB_CONNECTION=$DB_CONNECTION
-ENV OPEN_WEATHER_API_KEY=$OPEN_WEATHER_API_KEY
 
 # Copy app, build artifacts
 COPY --chown=www-data ./laravel .
@@ -31,6 +27,7 @@ COPY --chown=www-data --from=builder /var/www/app/public /var/www/app/public
 
 # App specific commands
 RUN touch database/database.sqlite && \
-    php artisan migrate --force && \
-    php artisan optimize
-
+    touch .env && \
+    echo APP_KEY= > .env && \
+    php artisan key:generate && \
+    php artisan migrate --force

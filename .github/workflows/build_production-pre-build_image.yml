@@ -3,7 +3,10 @@ name: Build Production pre-build Docker image
 on:
   workflow_dispatch:
   push:
-    paths: [dockerfile.production-pre-build, .github/workflows/build_production-pre-build_image.yml]
+    paths: 
+      - dockerfile.production-pre-build
+      - configs/nginx.production.conf
+      - .github/workflows/build_production-pre-build_image.yml
 
 jobs:
   build:
