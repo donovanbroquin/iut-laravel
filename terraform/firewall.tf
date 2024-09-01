@@ -10,7 +10,7 @@ resource "hcloud_firewall" "main" {
     ]
   }
 
-rule {
+  rule {
     direction = "in"
     protocol  = "tcp"
     port      = "443"
@@ -25,15 +25,15 @@ rule {
     protocol  = "tcp"
     port      = "22"
     source_ips = [
-      var.private_ipv4,
-      var.private_ipv6
+      "0.0.0.0/0",
+      "::/0"
     ]
   }
 
-    rule {
+  rule {
     direction = "out"
     protocol  = "tcp"
-    port = "any"
+    port      = "any"
     destination_ips = [
       "0.0.0.0/0",
       "::/0"
