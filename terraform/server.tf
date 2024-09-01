@@ -9,4 +9,22 @@ resource "hcloud_server" "main" {
     ipv4_enabled = true
     ipv6_enabled = true
   }
+
+  user_data = <<-EOF
+    #cloud-config
+    users:
+      - name: iut
+        ssh-authorized-keys:
+          - ${var.ssh_key}
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+        groups: sudo
+
+    ssh_pwauth: false
+    disable_root: true
+
+    runcmd:
+      - sed -i 's/^PermitRootLogin.*/PermitRootLogin no/' /etc/ssh/sshd_config
+      - systemctl reload sshd
+    EOF
 }
