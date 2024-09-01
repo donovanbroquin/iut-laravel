@@ -7,8 +7,10 @@ terraform {
     }
 
     ovh = {
-      source = "ovh/ovh"
+      source  = "ovh/ovh"
       version = "~> 0.48"
     }
   }
 }
+
+provider "ovh" {}
