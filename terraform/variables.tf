@@ -12,3 +12,8 @@ variable "private_ipv6" {
   type      = string
   sensitive = true
 }
+
+variable "dns_zone" {
+  type      = string
+  sensitive = false
+}
