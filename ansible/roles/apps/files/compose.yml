@@ -1,0 +1,25 @@
+services:
+  weather:
+    image: donovanbroquin/iut-weather:latest
+    container_name: 'weather'
+    restart: unless-stopped
+    environment:
+      - APP_NAME="IUT Weather"
+      - APP_URL=https://weather.${DOMAIN}
+      - OPEN_WEATHER_API_KEY=${DEMO_OPEN_WEATHER_KEY}
+    networks:
+      - iut
+    labels:
+      - traefik.http.routers.demo.rule=Host(`weather.${DOMAIN}`)
+      - traefik.http.routers.demo.tls=true
+      - traefik.http.routers.demo.entrypoints=websecure
+      - traefik.http.services.demo.loadbalancer.server.port=80
+      - traefik.http.routers.demo.tls.certresolver=letsencrypt
+
+networks:
+  iut:
+    external: true
+
+volumes:
+  letsencrypt:
+    name: letsencrypt

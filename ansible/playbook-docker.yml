@@ -1,0 +1,6 @@
+---
+- hosts: main
+  become: yes
+  roles:
+    - docker
+    - traefik

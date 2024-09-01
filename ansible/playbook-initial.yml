@@ -1,0 +1,6 @@
+---
+- hosts: main
+  become: false
+  roles:
+    - traefik
+    - apps

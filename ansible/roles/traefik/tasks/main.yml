@@ -1,0 +1,37 @@
+---
+- name: Set directory path variable
+  set_fact:
+    directory: "/home/{{ ansible_user }}/traefik"
+
+- name: Create directory for the compose file
+  file:
+    path: "{{ directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy compose file
+  copy:
+    src: compose.yml
+    dest: "{{ directory }}/compose.yml"
+    mode: '0644'
+
+- name: Copy .env file
+  copy:
+    src: .env
+    dest: "{{ directory }}/.env"
+    mode: '0644'
+
+- name: Pull images
+  command: docker compose pull
+  args:
+    chdir: "{{ directory }}"
+
+- name: Down services
+  command: docker compose down --remove-orphans
+  args:
+    chdir: "{{ directory }}"
+
+- name: Up services
+  command: docker compose up -d
+  args:
+    chdir: "{{ directory }}"
