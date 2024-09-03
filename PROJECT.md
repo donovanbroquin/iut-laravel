@@ -2,6 +2,8 @@
 
 Cette application à pour but de vous familiariser avec le framework PHP Laravel au travers de son développement.
 
+Pour vous aider à comprendre le projet, une démo est présente: [weather.dhonnabhain.me](https://weather.dhonnabhain.me)
+
 ## Cadre
 
 ### Initialisation du projet
