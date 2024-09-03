@@ -19,7 +19,7 @@ La gestion de cette dernière (création des tables, ...) doit se faire exclusiv
 
 La partie communication quand à elle doit **impérativement** se faire avec l’[ORM](https://fr.wikipedia.org/wiki/Mapping_objet-relationnel) de Laravel (modèles, requêtes, ...) [Eloquent](https://laravel.com/docs/11.x/eloquent).
 
-Enfin, un diagrame *minimal* de la base de données est disponible [ici](https://dbdiagram.io/d/IUT-Weather-66ca11d9a346f9518cf9ca96).
+Enfin, un diagramme *minimal* de la base de données est disponible [ici](https://dbdiagram.io/d/IUT-Weather-66ca11d9a346f9518cf9ca96).
 
 > La base de données sera ainsi le fichier `laravel/database.sqlite` et ne devra pas être présent dans GitHub.
 
