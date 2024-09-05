@@ -5,7 +5,7 @@ This repository is a starter giving you all tools you need to help you build you
 
 ## Requirements
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- [Visual Studio Code](https://code.visualstudio.com/download) with the [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) extension
+- [Visual Studio Code](https://code.visualstudio.com/download) with the [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker) and the [DevContainers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extensions
 - Git
 
 ### Windows Requirements
