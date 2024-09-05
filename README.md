@@ -23,6 +23,7 @@ Create a project named iut-weather in your own GitHub and follow the repository 
 ### Files and directory
 From this repository (donovanbroquin/iut-laravel), take the following files and put them on your own repository:
 
+- .devContainer
 - .gitignore
 - compose.yml
 - dockerfile
