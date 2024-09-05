@@ -13,7 +13,7 @@ ENV NODE_VERSION=20.16.0
 
 # Install system dependencies
 RUN apt update -y && \
-    apt install -y libbz2-dev zlib1g-dev libpng-dev libxml2-dev libxslt-dev libzip-dev libonig-dev zip && \ 
+    apt install -y libbz2-dev zlib1g-dev libpng-dev libxml2-dev libxslt-dev libzip-dev libonig-dev zip git && \ 
     apt clean && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir /var/run/supervisord && \
