@@ -1,0 +1,52 @@
+---
+- name: Install gpg
+  ansible.builtin.apt:
+    name:
+      - gpg
+    update_cache: true
+    state: present
+
+- name: Add Grafana key
+  ansible.builtin.get_url:
+    url: https://apt.grafana.com/gpg.key
+    dest: /etc/apt/trusted.gpg.d/raw-grafana.gpg
+    mode: '0644'
+
+# - name: Dearmour key
+#   ansible.builtin.command:
+#     cmd: "gpg --dearmor -o /etc/apt/trusted.gpg.d/grafana.gpg /etc/apt/trusted.gpg.d/raw-grafana.gpg"
+
+- name: Remove raw key
+  ansible.builtin.file:
+    path: /etc/apt/trusted.gpg.d/raw-grafana.gpg
+    state: absent
+
+- name: Add Grafana repository
+  ansible.builtin.apt_repository:
+    repo: deb [signed-by=/etc/apt/trusted.gpg.d/grafana.gpg] https://apt.grafana.com stable main
+    state: present
+
+- name: Update apt
+  ansible.builtin.apt:
+    update_cache: true
+
+- name: Install Alloy
+  ansible.builtin.apt:
+    name: [alloy]
+
+- name: Define configuration file
+  ansible.builtin.template:
+    src: config.j2
+    dest: /etc/alloy/config.alloy
+
+- name: Ensure Alloy run on boot
+  ansible.builtin.systemd_service:
+    service: alloy.service
+    enabled: true
+    state: started
+    daemon_reload: true
+
+- name: Reload Alloy service
+  ansible.builtin.systemd:
+    name: alloy.service
+    state: reloaded

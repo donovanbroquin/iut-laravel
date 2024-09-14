@@ -1,37 +1,37 @@
 ---
 - name: Set directory path variable
-  set_fact:
+  ansible.builtin.set_fact:
     directory: "/home/{{ ansible_user }}/apps"
 
 - name: Create directory for the compose file
-  file:
+  ansible.builtin.file:
     path: "{{ directory }}"
     state: directory
     mode: '0755'
 
 - name: Copy compose file
-  copy:
+  ansible.builtin.copy:
     src: compose.yml
     dest: "{{ directory }}/compose.yml"
     mode: '0644'
 
 - name: Copy .env file
-  copy:
+  ansible.builtin.copy:
     src: .env
     dest: "{{ directory }}/.env"
     mode: '0644'
 
 - name: Pull images
-  command: docker compose pull
+  ansible.builtin.command: docker compose pull
   args:
     chdir: "{{ directory }}"
 
 - name: Down services
-  command: docker compose down --remove-orphans
+  ansible.builtin.command: docker compose down --remove-orphans
   args:
     chdir: "{{ directory }}"
 
 - name: Up services
-  command: docker compose up -d
+  ansible.builtin.command: docker compose up -d
   args:
     chdir: "{{ directory }}"

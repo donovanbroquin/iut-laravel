@@ -1,0 +1,8 @@
+---
+- name: Install Alloy
+  hosts: main
+  become: true
+  vars_files: [vars/grafana.yml]
+
+  roles:
+    - alloy

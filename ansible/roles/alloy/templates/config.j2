@@ -1,0 +1,22 @@
+prometheus.exporter.unix "unix" {
+  enable_collectors = ["systemd"]
+}
+
+prometheus.scrape "prometheus" {
+  targets = prometheus.exporter.unix.unix.targets
+  
+  forward_to = [prometheus.remote_write.grafanacloud.receiver]
+  scrape_timeout = "1s"
+  scrape_interval = "5s"
+}
+
+prometheus.remote_write "grafanacloud" {
+  endpoint {
+    url = "{{ grafana_url }}"
+
+    basic_auth {
+      username = "{{ grafana_user }}"
+      password = "{{ grafana_password }}"
+    }
+  }
+}
